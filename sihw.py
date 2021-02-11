@@ -332,9 +332,15 @@ def formatHwTableToLmsKurse(table, lms): #html table als input
     soup = BeautifulSoup(table, 'html.parser')
     rows = soup.find_all('tr')
     #haut alle zeilen raus die schon abgegeben sind oder beendet wurden
-    rows = [row for row in rows if 'closed-homework' not in str(row)]
-    rows = [row for row in rows if 'title=\"Abgegeben\"' not in str(row)]
-    rows = [row for row in rows if 'class=\"comment\"' not in str(row)]
+    # rows = [row for row in rows if 'closed-homework' not in str(row)]
+    # rows = [row for row in rows if 'title=\"Abgegeben\"' not in str(row)]
+    # rows = [row for row in rows if 'class=\"comment\"' not in str(row)]
+
+    rows = [row for row in rows if
+            'closed-homework' not in str(row) and
+            'title=\"Abgegeben\"' not in str(row) and
+            'class=\"comment\"' not in str(row)
+            ]
 
     i = 0
     while True:

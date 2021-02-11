@@ -272,7 +272,7 @@ def getFachAufgabeUI(lms):
         else:
             aufgabe = Kurs['aufgaben'][0]
 
-        downloadFolder = aufgabe['folder'] if aufgabe['folder'] != None else'C:/Users/Ben/Downloads/'
+        downloadFolder = aufgabe['folder'] if aufgabe['folder'] != None else'C:/Users/%USERNAME%/Downloads/'
 
         return Kurs, aufgabe, downloadFolder
 
@@ -533,7 +533,7 @@ def main():
         args = initArgs()
         if args.setup:
             setupUI(lms)
-        downloadFolder = 'C:/Users/Ben/Downloads'
+        downloadFolder = 'C:/Users/%USERNAME%/Downloads'
         if args.download or args.info or args.upload or args.create:
             fach, aufgabe, downloadFolder = getFachAufgabeUI(lms)
             if args.create:

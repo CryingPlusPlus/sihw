@@ -477,7 +477,8 @@ def createHandler(lms, Kurs, aufgabe):
         os.mkdir(dirName)
         aufgabe['folder'] = dirName
     except:
-        print('Directory already exists')
+        print('Error accured directory probably already exists')
+        print('otherwise check -s (settings) Arbeitsordner')
 
 
 def zipdir(path, ziph):

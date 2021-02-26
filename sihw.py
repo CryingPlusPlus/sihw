@@ -49,7 +49,7 @@ def driverManager(usr, pwd, downloadFolder):
         yield driver
     finally:
         print('Driver quitting the industry...')
-        # driver.quit()
+        driver.quit()
 
 #LMS Stuff ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 def sleepLMS(lms):
@@ -112,7 +112,7 @@ def initDriver(downloadFolder):
     profile.set_preference('browser.download.dir', downloadFolder)
     profile.set_preference('pdfjs.disabled', True)
     options = webdriver.FirefoxOptions()
-    # options.add_argument('--headless')
+    options.add_argument('--headless')
     driver = webdriver.Firefox(firefox_profile=profile, options=options)
     return driver
 
@@ -157,7 +157,7 @@ def uploadFile(driver, file, aufgabe):
     driver.get('https://lms.at' + aufgabe['href'])
     getElementByLink('Abgabe hochladen', driver).click()
     getElement('//*[@id="upload_file"]', driver).send_keys(file)
-    getElement('/html/body/div[1]/div[4]/div/div/form/table/tbody/tr[2]/td/input[1]', driver).click()
+    getElement('/html/body/div[2]/div[4]/div/div/form/table/tbody/tr[2]/td/input[1]', driver).click()
     getElement('//*[@id="save_assignment2"]', driver).click()
     return True
 #Argumente Verarbeiten  ------------------------------------------------------------------------------------------------------------------------------------------------e

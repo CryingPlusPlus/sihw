@@ -96,7 +96,6 @@ def getElement(xpath, driver):
 def login(driver, username, password):
     #initialisiert driver falls es ihn noch nicht gibt -> optimierung... initDriver dauert lange nur machen wenn es nötig ist
     print('LMS Login...')
-    #klassisches Selenium zeug... sucht elemente mit xpath und interagiert dann
     driver.get('https://lms.at/register')
     getElement('//*[@id="email"]', driver).send_keys(username)
     getElement('//*[@id="password"]', driver).send_keys(password)
@@ -332,9 +331,6 @@ def formatHwTableToLmsKurse(table, lms): #html table als input
     soup = BeautifulSoup(table, 'html.parser')
     rows = soup.find_all('tr')
     #haut alle zeilen raus die schon abgegeben sind oder beendet wurden
-    # rows = [row for row in rows if 'closed-homework' not in str(row)]
-    # rows = [row for row in rows if 'title=\"Abgegeben\"' not in str(row)]
-    # rows = [row for row in rows if 'class=\"comment\"' not in str(row)]
 
     rows = [row for row in rows if
             'closed-homework' not in str(row) and
@@ -410,7 +406,7 @@ def formatKurseToOutput(Kurse):
     if not len_of_titles:
         len_of_titles = [0]
     # spacing = max([len(aufgabe['title']) for _, Kurs in Kurse.items() for aufgabe in Kurs['aufgaben']]) + 7 
-    spacing = max(len_of_titles)
+    spacing = max(len_of_titles) + 5
     for _, Kurs in Kurse.items():
         if len(Kurs['aufgaben']) > 0:
             output += '\t' +Kurs['title']

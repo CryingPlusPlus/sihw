@@ -562,6 +562,7 @@ def main():
             shoutSpecificInfo(fach, aufgabe)
         elif sum([args.info, args.download, args.upload, args.create, args.setup]) == 0:
             shoutGenerelleInfos(lms)
+
 if __name__ == '__main__':
     main()
 

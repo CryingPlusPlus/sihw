@@ -49,7 +49,7 @@ def driverManager(usr, pwd, downloadFolder):
         yield driver
     finally:
         print('Driver quitting the industry...')
-        # driver.quit()
+        driver.quit()
 
 #LMS Stuff ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 def sleepLMS(lms):
@@ -111,7 +111,7 @@ def initDriver(downloadFolder):
     profile.set_preference('browser.download.dir', downloadFolder)
     profile.set_preference('pdfjs.disabled', True)
     options = webdriver.FirefoxOptions()
-    # options.add_argument('--headless')
+    options.add_argument('--headless')
     driver = webdriver.Firefox(firefox_profile=profile, options=options)
     return driver
 

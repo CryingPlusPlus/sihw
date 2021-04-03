@@ -25,7 +25,7 @@ def waiter(f):
                 break
             except Exception as e:
                 sleep(.1)
-                if i >= 200:
+                if i >= 100:
                     print('Internet ist wahrscheinlich off :( Error: ', e)
                     break
         return result
@@ -49,7 +49,7 @@ def driverManager(usr, pwd, downloadFolder):
         yield driver
     finally:
         print('Driver quitting the industry...')
-        driver.quit()
+        # driver.quit()
 
 #LMS Stuff ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 def sleepLMS(lms):
@@ -99,7 +99,7 @@ def login(driver, username, password):
     driver.get('https://lms.at/register')
     getElement('//*[@id="email"]', driver).send_keys(username)
     getElement('//*[@id="password"]', driver).send_keys(password)
-    getElement('/html/body/div[1]/div[4]/div/div/div[1]/form/div[3]/div[1]/button', driver).click()
+    getElement('/html/body/div[2]/div[4]/div/div/div[1]/form/div[3]/div[1]/button', driver).click()
 
 def initDriver(downloadFolder):
     #Firefox options und profile config nicht anfassen
@@ -111,7 +111,7 @@ def initDriver(downloadFolder):
     profile.set_preference('browser.download.dir', downloadFolder)
     profile.set_preference('pdfjs.disabled', True)
     options = webdriver.FirefoxOptions()
-    options.add_argument('--headless')
+    # options.add_argument('--headless')
     driver = webdriver.Firefox(firefox_profile=profile, options=options)
     return driver
 
@@ -119,7 +119,7 @@ def DownloadHomeWorkTable(driver):
     print('Lade HTML-Table runter....')
     driver.get('https://lms.at/dotlrn/')
     getElement('//*[@id="hide-closed-homework"]', driver).click()
-    table = getElement('/html/body/div[1]/div[4]/div/div/div/div[2]/div[2]/div/div[2]/div/table', driver).get_attribute('innerHTML')
+    table = getElement('/html/body/div[2]/div[4]/div/div/div/div[2]/div[2]/div/div[2]/div/table', driver).get_attribute('innerHTML')
     return table
 
 def downloadInfo(driver, aufgabe):
@@ -127,8 +127,8 @@ def downloadInfo(driver, aufgabe):
     if aufgabe == None or aufgabe['href'] == None:
         return None
     driver.get('https://lms.at/' + aufgabe['href'])
-    instructions = getElement('/html/body/div[1]/div[4]/div/div/div[4]/div/div[5]', driver)
-    downloads = getElement('/html/body/div[1]/div[4]/div/div/div[4]/div/div[6]/div[1]/table/tbody', driver)
+    instructions = getElement('/html/body/div[2]/div[4]/div/div/div[4]/div/div[5]', driver)
+    downloads = getElement('/html/body/div[2]/div[4]/div/div/div[4]/div/div[6]/div[1]/table/tbody', driver)
     soup = BeautifulSoup(downloads.get_attribute('innerHTML'), 'html.parser')
     links = soup.find_all('a')
     downloads = [a.text for a in links]
